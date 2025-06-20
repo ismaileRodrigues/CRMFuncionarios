@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM - Cadastro de Funcionários</title>
+  <link rel="stylesheet" href="/style/style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">CRM Funcionários</div>
+    <nav>
+      <button onclick="mostrarFormulario()">Novo Cadastro</button>
+      <button onclick="mostrarLista()">Lista de Funcionários</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="formulario" class="card">
+      <h2 id="form-title">Cadastrar Funcionário</h2>
+      <form id="cadastroForm">
+        <input type="text" placeholder="Nome Completo" id="nome" required />
+        <input type="text" placeholder="CPF" id="cpf" required />
+        <input type="text" placeholder="Cargo" id="cargo" required />
+        <input type="text" placeholder="Departamento" id="departamento" />
+        <input type="date" placeholder="Data de Admissão" id="dataAdmissao" required />
+        <input type="number" placeholder="Salário" id="salario" required />
+        <input type="date" placeholder="Data de Nascimento" id="dataNascimento" required />
+        <div class="botoes">
+          <button type="submit" id="salvarBtn">Salvar</button>
+          <button type="reset">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="lista" class="card" style="display:none;">
+      <h2>Funcionários Cadastrados</h2>
+      <input type="text" id="pesquisa" placeholder="Pesquisar por nome..." />
+      <div id="resultado"></div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 - Sistema CRM de Funcionários
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    let editandoCPF = null;
+
+    function editarFuncionario(cpf) {
+      const funcionarios = JSON.parse(localStorage.getItem('funcionarios')) || [];
+      const func = funcionarios.find(f => f.CPF === cpf);
+      if (!func) return;
+
+      document.getElementById('nome').value = func.Nome;
+      document.getElementById('cpf').value = func.CPF;
+      document.getElementById('cpf').disabled = true;
+      document.getElementById('cargo').value = func.Cargo;
+      document.getElementById('departamento').value = func.Departamento;
+      document.getElementById('dataAdmissao').value = func.DataAdmissao;
+      document.getElementById('salario').value = func.Salario;
+      document.getElementById('dataNascimento').value = func.dataNascimento;
+      document.getElementById('form-title').textContent = 'Editar Funcionário';
+      editandoCPF = cpf;
+      mostrarFormulario();
+    }
+
+    async function deletarFuncionario(cpf) {
+      if (!confirm('Tem certeza que deseja excluir este funcionário?')) return;
+
+      try {
+        await fetch(`https://sheetdb.io/api/v1/mhbjwyvvc2n6q/CPF/${cpf}`, {
+          method: 'DELETE'
+        });
+        localStorage.removeItem('funcionarios');
+        alert('Funcionário deletado com sucesso.');
+        mostrarLista();
+      } catch (error) {
+        alert('Erro ao deletar.');
+      }
+    }
+  </script>
+</body>
+</html>
