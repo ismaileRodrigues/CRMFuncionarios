@@ -11,6 +11,7 @@
     <div class="logo">CRM Funcionários</div>
     <nav>
       <button onclick="mostrarFormulario()">Novo Cadastro</button>
+      
       <button onclick="mostrarLista()">Lista de Funcionários</button>
     </nav>
   </header>
@@ -19,12 +20,19 @@
     <section id="formulario" class="card">
       <h2 id="form-title">Cadastrar Funcionário</h2>
       <form id="cadastroForm">
+        <label for="nome">Nome</label>
         <input type="text" placeholder="Nome Completo" id="nome" required />
+        <label for="cpf">CPF</label>
         <input type="text" placeholder="CPF" id="cpf" required />
+        <label for="cargo">Cargo</label>
         <input type="text" placeholder="Cargo" id="cargo" required />
+        <label for="departamento">Departamento</label>
         <input type="text" placeholder="Departamento" id="departamento" />
+        <label for="dataAdmissao">Data de Admissão</label>
         <input type="date" placeholder="Data de Admissão" id="dataAdmissao" required />
+        <label for="salario">Salário</label>
         <input type="number" placeholder="Salário" id="salario" required />
+        <label for="dataNascimento">Data de Nascimento</label>
         <input type="date" placeholder="Data de Nascimento" id="dataNascimento" required />
         <div class="botoes">
           <button type="submit" id="salvarBtn">Salvar</button>
@@ -34,6 +42,7 @@
     </section>
 
     <section id="lista" class="card" style="display:none;">
+  <button id="atualizarDados">Atualizar Dados</button>
       <h2>Funcionários Cadastrados</h2>
       <input type="text" id="pesquisa" placeholder="Pesquisar por nome..." />
       <div id="resultado"></div>

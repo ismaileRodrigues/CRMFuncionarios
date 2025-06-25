@@ -86,7 +86,7 @@ function exibirFuncionarios(listaFiltrada = funcionarios) {
       <p><strong>Cargo:</strong> ${func.Cargo}</p>
       <p><strong>Departamento:</strong> ${func.Departamento}</p>
       <p><strong>Admissão:</strong> ${func.DataAdmissao}</p>
-      <p><strong>Salário:</strong> R$ ${func.Salario}</p>
+      <p><strong>Salário:</strong> ${func.Salario}</p>
       <p><strong>Data de Nascimento:</strong> ${func.dataNascimento}</p>
       <button onclick="editarFuncionario('${func.CPF}')">Editar</button>
       <button onclick="deletarFuncionario('${func.CPF}')">Excluir</button>
@@ -150,3 +150,7 @@ async function deletarFuncionario(cpf) {
     console.error(error);
   }
 }
+document.getElementById('atualizarDados').addEventListener('click', () => {
+  localStorage.removeItem('funcionarios');
+  carregarFuncionarios();
+});

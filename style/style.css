@@ -74,7 +74,7 @@ form input {
   gap: 1rem;
 }
 
-.botoes button {
+.botoes button,#atualizarDados {
   padding: 0.8rem;
   border: none;
   border-radius: 5px;
@@ -84,7 +84,7 @@ form input {
   font-size: 1rem;
 }
 
-.botoes button:hover {
+.botoes button,#atualizarDados:hover {
   background: #00317a;
 }
 
